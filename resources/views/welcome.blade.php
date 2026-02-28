@@ -102,6 +102,108 @@
                     </div>
                 </div>
 
+                <!-- Installed Packages Section -->
+                <div class="row row-deck row-cards mt-3">
+                    <div class="col-12">
+                        <x-ui.card>
+                            <x-slot name="header">
+                                <h3 class="card-title">
+                                    <i class="ti ti-package me-2"></i>
+                                    Instalirani Paketi & Alati
+                                </h3>
+                            </x-slot>
+
+                            <div class="row g-3">
+                                <!-- Log Viewer -->
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="bg-blue-lt avatar me-3">
+                                            <i class="ti ti-file-text"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">Log Viewer</h4>
+                                            <p class="text-secondary mb-2">Pregled Laravel log fileova</p>
+                                            <a href="/log-viewer" target="_blank" class="btn btn-sm btn-primary">
+                                                Otvori Log Viewer
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Backup -->
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="bg-green-lt avatar me-3">
+                                            <i class="ti ti-database-export"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">Spatie Backup</h4>
+                                            <p class="text-secondary mb-2">Backupi aplikacije i baze</p>
+                                            <code class="text-muted small">php artisan backup:run</code>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Media Library -->
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="bg-purple-lt avatar me-3">
+                                            <i class="ti ti-photo"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">Media Library</h4>
+                                            <p class="text-secondary mb-2">Upravljanje medijama</p>
+                                            <span class="badge bg-purple">Instaliran</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Log -->
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="bg-orange-lt avatar me-3">
+                                            <i class="ti ti-activity"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">Activity Log</h4>
+                                            <p class="text-secondary mb-2">Praćenje aktivnosti korisnika</p>
+                                            <span class="badge bg-orange">Instaliran</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Permissions -->
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="bg-red-lt avatar me-3">
+                                            <i class="ti ti-shield-lock"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">Permissions</h4>
+                                            <p class="text-secondary mb-2">Upravljanje rolama i dozvolama</p>
+                                            <span class="badge bg-red">Instaliran</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Debugbar (Dev) -->
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="bg-cyan-lt avatar me-3">
+                                            <i class="ti ti-bug"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="mb-1">Debugbar</h4>
+                                            <p class="text-secondary mb-2">Debug toolbar (samo dev)</p>
+                                            <span class="badge bg-cyan">Dev Only</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </x-ui.card>
+                    </div>
+                </div>
+
                 <!-- Main Content Area -->
                 <div class="row row-deck row-cards mt-3">
                     <!-- Table Example -->
