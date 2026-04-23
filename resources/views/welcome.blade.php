@@ -288,7 +288,12 @@
                         </x-ui.card>
                     </div>
                 </div>
-
+    <!-- Trigger za modal -->
+    <div class="mt-4">
+        <x-ui.button variant="primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Otvori Modal
+        </x-ui.button>
+    </div>
                 <!-- Additional Alerts -->
                 <div class="row mt-3">
                     <div class="col-12">
@@ -305,6 +310,8 @@
             </div>
         </div>
     </div>
+
+
 
     <x-slot name="scripts">
         <!-- Modal Example (if needed) -->

@@ -1,7 +1,16 @@
 <laravel-boost-guidelines>
 === foundation rules ===
 
+
 # Laravel Boost Guidelines
+
+## Skillovi i .ai/skills folder
+
+- Svi custom i community skillovi za Boost i MCP nalaze se u `.ai/skills` folderu.
+- Agent (i svi workflowi) moraju automatski pretraživati `.ai/skills` i koristiti dostupne skillove.
+- Ako `boost:mcp` ili sučelje ne prikazuje skillove, ručno provjeri `.ai/skills` i koristi ih prema potrebi.
+- Svaki novi skill treba biti jasno dokumentiran u svom `SKILL.md` i referenciran ovdje ako je važan za workflow.
+
 
 The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to ensure the best experience when building Laravel applications.
 
@@ -9,7 +18,7 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.3.30
+- php - 8.5.0
 - laravel/framework (LARAVEL) - v12
 - laravel/prompts (PROMPTS) - v0
 - laravel/boost (BOOST) - v2
