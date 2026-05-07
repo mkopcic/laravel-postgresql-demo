@@ -29,29 +29,31 @@ Profesionalno strukturiran Laravel 12 projekt s PostgreSQL bazom podataka i Tabl
 ## � Instalirani Paketi
 
 ### Development Paketi
+
 - **Laravel Debugbar** `v4.0.10` - Debugging toolbar za vrijeme razvoja
 - **Laravel Boost** `v2.2.1` - AI-powered Laravel assistant
 
 ### Production Paketi
+
 - **Opcodesio Log Viewer** `v3.23.0` - Pregled Laravel log fileova preko web sučelja
-  - URL: `/log-viewer`
-  - Konfig: `config/log-viewer.php`
+    - URL: `/log-viewer`
+    - Konfig: `config/log-viewer.php`
 
 - **Spatie Laravel Backup** `v10.0.1` - Automatski backupi aplikacije i baze
-  - Konfig: `config/backup.php`
-  - Komande: `php artisan backup:run`, `backup:list`, `backup:clean`
+    - Konfig: `config/backup.php`
+    - Komande: `php artisan backup:run`, `backup:list`, `backup:clean`
 
 - **Spatie Media Library** `v11.21.0` - Upravljanje medijskim fileovima
-  - Konfig: `config/media-library.php`
-  - Migracija: `create_media_table`
+    - Konfig: `config/media-library.php`
+    - Migracija: `create_media_table`
 
 - **Spatie Activity Log** `v4.12.1` - Praćenje aktivnosti korisnika
-  - Konfig: `config/activitylog.php`
-  - Migracije: `create_activity_log_table`, `add_event_column`, `add_batch_uuid_column`
+    - Konfig: `config/activitylog.php`
+    - Migracije: `create_activity_log_table`, `add_event_column`, `add_batch_uuid_column`
 
 - **Spatie Laravel Permission** `v7.2.3` - Upravljanje rolama i dozvolama
-  - Konfig: `config/permission.php`
-  - Migracija: `create_permission_tables`
+    - Konfig: `config/permission.php`
+    - Migracija: `create_permission_tables`
 
 ## �📁 Struktura projekta
 
@@ -144,6 +146,16 @@ php artisan serve
 ```
 
 Otvori browser na `http://localhost:8000`
+
+## 📚 Dokumentacija
+
+Svi projektni dokumenti se nalaze u `docs/technical`:
+
+- `docs/technical/redis-cache.md`
+- `docs/technical/POSTGRESQL-SETUP.md`
+- `docs/technical/QUICK-REFERENCE.md`
+- `docs/technical/TABLER-COMPONENTS.md`
+- `docs/technical/laravel-ai-stack.md`
 
 ## 🎨 Tabler Layout Sistem
 
@@ -453,16 +465,19 @@ php artisan migrate:fresh --seed
 ## 📚 Dodatni resursi
 
 ### Laravel
+
 - [Laravel Dokumentacija](https://laravel.com/docs)
 - [Laravel Eloquent ORM](https://laravel.com/docs/eloquent)
 - [Laravel Blade Komponente](https://laravel.com/docs/blade#components)
 
 ### Tabler
+
 - [Tabler Documentation](https://tabler.io/docs)
 - [Tabler Icons](https://tabler-icons.io/)
 - [Tabler Examples](https://preview.tabler.io/)
 
 ### PostgreSQL
+
 - [PostgreSQL Dokumentacija](https://www.postgresql.org/docs/)
 - [Laravel PostgreSQL](https://laravel.com/docs/database#postgresql)
 

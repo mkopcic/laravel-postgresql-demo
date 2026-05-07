@@ -2,8 +2,18 @@
     "agents": [
         "copilot"
     ],
-    "guidelines": true,
     "packages": [
         "spatie/laravel-medialibrary"
+    ],
+    "skills": [
+        "laravel-best-practices",
+        "medialibrary-development",
+        "eloquent-best-practices",
+        "laravel-11-12-app-guidelines",
+        "laravel-patterns",
+        "laravel-security",
+        "laravel-specialist",
+        "laravel-tdd",
+        "php-best-practices"
     ]
 }

@@ -40,7 +40,24 @@
                 </x-ui.alert>
 
                 <!-- Cards Row -->
-                <div class="row row-deck row-cards">
+                    <!-- Cards Row -->
+                    <div class="row row-deck row-cards">
+                        <!-- App Info Card (prva u gridu) -->
+                        <div class="col-sm-6 col-lg-3">
+                            <x-ui.card class="card-sm">
+                                <div class="d-flex align-items-center">
+                                    <span class="bg-indigo text-white avatar">
+                                        <i class="ti ti-info-circle"></i>
+                                    </span>
+                                    <div class="ms-3">
+                                        <div class="text-secondary">App info</div>
+                                        <div class="small mb-1">PHP: <strong>8.5</strong></div>
+                                        <div class="small mb-1">Laravel: <strong>12.57.0</strong></div>
+                                        <div class="small mb-1">DB: <strong>pgsql</strong></div>
+                                    </div>
+                                </div>
+                            </x-ui.card>
+                        </div>
                     <!-- Card 1 -->
                     <div class="col-sm-6 col-lg-3">
                         <x-ui.card class="card-sm">

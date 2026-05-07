@@ -26,13 +26,13 @@
 
 ### Lokacije Fajlova
 
-| Komponenta | Putanja |
-|-----------|---------|
-| **PostgreSQL Binaries** | `C:\laragon\bin\postgresql\pgsql\bin\` |
-| **Data Direktorij** | `C:\laragon\data\postgresql\` |
-| **Konfiguracijski Fajlovi** | `C:\laragon\data\postgresql\` |
-| **Server Log** | `C:\laragon\data\postgresql\server.log` |
-| **php.ini** | `C:\laragon\bin\php\php-8.5.0-nts-Win32-vs17-x64\php.ini` |
+| Komponenta                  | Putanja                                                   |
+| --------------------------- | --------------------------------------------------------- |
+| **PostgreSQL Binaries**     | `C:\laragon\bin\postgresql\pgsql\bin\`                    |
+| **Data Direktorij**         | `C:\laragon\data\postgresql\`                             |
+| **Konfiguracijski Fajlovi** | `C:\laragon\data\postgresql\`                             |
+| **Server Log**              | `C:\laragon\data\postgresql\server.log`                   |
+| **php.ini**                 | `C:\laragon\bin\php\php-8.5.0-nts-Win32-vs17-x64\php.ini` |
 
 ### Instalirana Baza Podataka
 
@@ -51,12 +51,12 @@ Status:     Aktivna ✓
 ### PostgreSQL Superuser
 
 ```yaml
-Host:       localhost (127.0.0.1)
-Port:       5432
-Username:   postgres
-Password:   (prazno - nema passworda)
-Auth:       trust
-Database:   postgres (default) ili postgresql_test
+Host: localhost (127.0.0.1)
+Port: 5432
+Username: postgres
+Password: (prazno - nema passworda)
+Auth: trust
+Database: postgres (default) ili postgresql_test
 ```
 
 ### Connection String
@@ -101,6 +101,7 @@ host    all             all             ::1/128                 md5
 ```
 
 Nakon izmjene, restartuj server:
+
 ```bash
 & "C:\laragon\bin\postgresql\pgsql\bin\pg_ctl.exe" -D "C:\laragon\data\postgresql" restart
 ```
@@ -113,13 +114,13 @@ Nakon izmjene, restartuj server:
 
 Laragon direktorij: `C:\laragon\bin\postgresql\`
 
-| Skripta | Funkcija |
-|---------|----------|
-| `start-postgresql.bat` | Pokreni server |
-| `stop-postgresql.bat` | Zaustavi server |
-| `restart-postgresql.bat` | Restartuj server |
-| `status-postgresql.bat` | Provjeri status |
-| `psql-connect.bat` | Otvori psql klijent |
+| Skripta                  | Funkcija            |
+| ------------------------ | ------------------- |
+| `start-postgresql.bat`   | Pokreni server      |
+| `stop-postgresql.bat`    | Zaustavi server     |
+| `restart-postgresql.bat` | Restartuj server    |
+| `status-postgresql.bat`  | Provjeri status     |
+| `psql-connect.bat`       | Otvori psql klijent |
 
 **Upotreba:** Dvostruki klik na .bat fajl
 
@@ -151,15 +152,15 @@ Laragon direktorij: `C:\laragon\bin\postgresql\`
 Laragon **NEMA** native PostgreSQL integraciju kao MySQL, ali možeš:
 
 1. **Dodati Quick Action:**
-   - Desni klik na Laragon tray icon
-   - `Tools` → `Quick app...`
-   - Dodaj start/stop skripte
+    - Desni klik na Laragon tray icon
+    - `Tools` → `Quick app...`
+    - Dodaj start/stop skripte
 
 2. **Auto-start na Windows Boot (opciono):**
-   - Task Scheduler → Create Basic Task
-   - Trigger: At system startup
-   - Action: `C:\laragon\bin\postgresql\pgsql\bin\pg_ctl.exe`
-   - Arguments: `-D C:\laragon\data\postgresql -l C:\laragon\data\postgresql\server.log start`
+    - Task Scheduler → Create Basic Task
+    - Trigger: At system startup
+    - Action: `C:\laragon\bin\postgresql\pgsql\bin\pg_ctl.exe`
+    - Arguments: `-D C:\laragon\data\postgresql -l C:\laragon\data\postgresql\server.log start`
 
 ---
 
@@ -172,10 +173,32 @@ Laragon **NEMA** native PostgreSQL integraciju kao MySQL, ali možeš:
 ```env
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
-DB_PORT=5432
+DB_PORT=15432
 DB_DATABASE=postgresql_test
 DB_USERNAME=postgres
 DB_PASSWORD=
+```
+
+> ⚠️ Zbog Windows rezervacije portova (WSL/Hyper-V), port `5432` i `5433` su blokirani. PostgreSQL sada koristi `15432`.
+>
+> Promjena je izvršena u:
+>
+> - `C:\laragon\data\postgresql\postgresql.conf`
+> - `C:\laragon\www\laravel-postgresql-demo\.env`
+
+### Testiranje PostgreSQL konekcije
+
+Pokreni ove komande da provjeriš da li server radi na `15432`:
+
+```powershell
+# Provjeri da PostgreSQL sluša na novom portu
+netstat -aon | findstr 15432
+
+# Provjeri status servera
+& "C:\laragon\bin\postgresql\pgsql\bin\pg_ctl.exe" -D "C:\laragon\data\postgresql" status
+
+# Testiraj konekciju iz psql klijenta
+& "C:\laragon\bin\postgresql\pgsql\bin\psql.exe" -U postgres -h localhost -p 15432 -d postgresql_test -c "SELECT version();"
 ```
 
 ### database.php (Automatski podešeno)
@@ -192,6 +215,7 @@ extension=pgsql
 ```
 
 **Provjeri da li su aktivne:**
+
 ```bash
 php -m | Select-String "pdo_pgsql|pgsql"
 ```
@@ -203,6 +227,7 @@ php artisan migrate:fresh
 ```
 
 **Tabele u bazi `postgresql_test`:**
+
 - cache
 - cache_locks
 - failed_jobs
@@ -225,7 +250,7 @@ php artisan migrate:fresh
 define ROOT "C:/laragon/www/laravel-postgresql-demo/public"
 define SITE "laravel-postgresql-demo.test"
 
-<VirtualHost *:80> 
+<VirtualHost *:80>
     DocumentRoot "${ROOT}"
     ServerName ${SITE}
     ServerAlias *.${SITE}
@@ -312,16 +337,16 @@ CREATE EXTENSION IF NOT EXISTS postgres_fdw;
 
 **Glavne ekstenzije koje dolaze sa instalacijom:**
 
-| Ekstenzija | Opis |
-|-----------|------|
-| `pg_stat_statements` | Track execution statistics |
-| `pgcrypto` | Cryptographic functions |
-| `uuid-ossp` | UUID generator |
-| `hstore` | Key-value store |
-| `citext` | Case-insensitive text |
-| `ltree` | Hierarchical tree structure |
-| `pg_trgm` | Trigram matching |
-| `tablefunc` | Cross-tabulation functions |
+| Ekstenzija           | Opis                        |
+| -------------------- | --------------------------- |
+| `pg_stat_statements` | Track execution statistics  |
+| `pgcrypto`           | Cryptographic functions     |
+| `uuid-ossp`          | UUID generator              |
+| `hstore`             | Key-value store             |
+| `citext`             | Case-insensitive text       |
+| `ltree`              | Hierarchical tree structure |
+| `pg_trgm`            | Trigram matching            |
+| `tablefunc`          | Cross-tabulation functions  |
 
 #### 4. Dodatne Ekstenzije (Ručna Instalacija)
 
@@ -366,38 +391,43 @@ effective_cache_size = 512MB
 
 ### Trenutno Stanje
 
-| Servis | Status | Način Upravljanja |
-|--------|--------|-------------------|
-| MySQL | ✓ Native u Laragonu | Laragon UI (Start/Stop) |
-| PostgreSQL | ✓ Ručno instaliran | Batch skripte ili PowerShell |
-| Apache | ✓ Native u Laragonu | Laragon UI |
-| nginx | ✓ Native u Laragonu | Laragon UI |
-| PHP | ✓ Native u Laragonu | Laragon UI (version switch) |
+| Servis     | Status              | Način Upravljanja            |
+| ---------- | ------------------- | ---------------------------- |
+| MySQL      | ✓ Native u Laragonu | Laragon UI (Start/Stop)      |
+| PostgreSQL | ✓ Ručno instaliran  | Batch skripte ili PowerShell |
+| Apache     | ✓ Native u Laragonu | Laragon UI                   |
+| nginx      | ✓ Native u Laragonu | Laragon UI                   |
+| PHP        | ✓ Native u Laragonu | Laragon UI (version switch)  |
 
 ### Gdje Upravlja Laragon?
 
 #### 1. **Laragon UI (Tray Icon)**
-   - Start/Stop MySQL, Apache, nginx
-   - Switchanje PHP verzija
-   - Kreiranje Quick Actions
-   - Terminala
+
+- Start/Stop MySQL, Apache, nginx
+- Switchanje PHP verzija
+- Kreiranje Quick Actions
+- Terminala
 
 #### 2. **Automatski VirtualHost-ovi**
-   - Laragon automatski detektuje nove projekte u `C:\laragon\www\`
-   - Auto-generacija `.test` domena
-   - Apache/nginx konfiguracijske datoteke
+
+- Laragon automatski detektuje nove projekte u `C:\laragon\www\`
+- Auto-generacija `.test` domena
+- Apache/nginx konfiguracijske datoteke
 
 #### 3. **PHP Extensions**
-   - Laragon → Menu → PHP → php.ini
-   - Ili direktno: `C:\laragon\bin\php\{verzija}\php.ini`
+
+- Laragon → Menu → PHP → php.ini
+- Ili direktno: `C:\laragon\bin\php\{verzija}\php.ini`
 
 #### 4. **Database Management Tools**
 
 **HeidiSQL** (Dolazi sa Laragonom):
+
 - `C:\laragon\bin\heidisql\heidisql.exe`
 - Podržava MySQL i PostgreSQL!
 
 **Kako dodati PostgreSQL konekciju u HeidiSQL:**
+
 1. Otvori HeidiSQL
 2. New → Session name: `PostgreSQL Laragon`
 3. **Network type:** PostgreSQL
@@ -410,8 +440,9 @@ effective_cache_size = 512MB
 #### 5. **Gdje PostgreSQL NIJE Integrisan**
 
 Laragon nema:
-- ❌ UI dugme za start/stop PostgreSQL  
-- ❌ Automatsku instalaciju PostgreSQL  
+
+- ❌ UI dugme za start/stop PostgreSQL
+- ❌ Automatsku instalaciju PostgreSQL
 - ❌ Service management za PostgreSQL
 
 **Rješenje:** Koristi batch skripte koje smo kreirali!
@@ -530,6 +561,7 @@ Get-Content "C:\laragon\data\postgresql\server.log" -Tail 50
 ### Problem: "could not find driver"
 
 **Rješenje:**
+
 ```powershell
 # 1. Otvori php.ini
 notepad "C:\laragon\bin\php\php-8.5.0-nts-Win32-vs17-x64\php.ini"
@@ -546,7 +578,7 @@ extension=pgsql
 
 ```powershell
 # Provjeri koji proces koristi port 5432
-Get-NetTCPConnection -LocalPort 5432 | 
+Get-NetTCPConnection -LocalPort 5432 |
     Select-Object -Property LocalPort, OwningProcess, State
 
 # Stop PostgreSQL
@@ -606,7 +638,7 @@ Remove-Item "C:\laragon\data\postgresql\*" -Recurse -Force
 
 ```
 Host:     127.0.0.1
-Port:     5432  
+Port:     5432
 User:     postgres
 Password: (prazno)
 Database: postgresql_test
@@ -634,6 +666,7 @@ C:\laragon\bin\postgresql\psql-connect.bat
 ### ❌ Problem: Carbon\CarbonPeriod::getIterator() Error (PHP 8.5+)
 
 **Greška:**
+
 ```
 Declaration of Carbon\CarbonPeriod::getIterator(): Generator must be compatible with DatePeriod::getIterator(): Iterator
 ```
@@ -645,11 +678,13 @@ Declaration of Carbon\CarbonPeriod::getIterator(): Generator must be compatible 
 #### Korak 1: Prebaci PHP u Laragonu
 
 **Preko Laragon UI:**
+
 1. Desni klik na Laragon tray icon
 2. **PHP** → **Version** → **php-8.3.30**
 3. Laragon će automatski restartovati Apache
 
 ILI kroz Command Line:
+
 ```powershell
 # Stop Apache
 # Promijeni PHP verziju kroz Laragon UI
