@@ -1,349 +1,310 @@
-<x-layouts.app title="Dobrodošli - Dashboard">
-    <x-slot name="head">
-        <!-- Additional head content if needed -->
-        <script src="{{ asset('tabler/dist/js/tabler-theme.min.js') }}"></script>
-    </x-slot>
+<x-layouts.landing title="{{ config('app.name') }} — Upravljanje aplikacijom">
 
-    <x-navbar />
-    <x-sidebar />
+    {{-- ===== NAVBAR ===== --}}
+    <header class="navbar navbar-expand-md navbar-light sticky-top border-bottom">
+        <div class="container">
+            <a href="{{ url('/') }}" class="navbar-brand">
+                <span class="fw-bold fs-4">{{ config('app.name', 'Laravel') }}</span>
+            </a>
 
-    <div class="page-wrapper">
-        <div class="page-header d-print-none">
-            <div class="container-xl">
-                <div class="row g-2 align-items-center">
-                    <div class="col">
-                        <h2 class="page-title">
-                            Dobrodošli u Laravel + Tabler Admin
-                        </h2>
-                        <div class="text-secondary mt-1">
-                            Profesionalno strukturiran Laravel projekt s Tabler UI komponentama
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#landing-nav" aria-controls="landing-nav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="landing-nav">
+                <div class="navbar-nav ms-auto align-items-center gap-2">
+                    {{-- Theme toggle --}}
+                    <div class="nav-item d-none d-md-flex">
+                        <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Uključi tamni način"
+                           data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <i class="ti ti-moon icon"></i>
+                        </a>
+                        <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Uključi svijetli način"
+                           data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <i class="ti ti-sun icon"></i>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm">
+                            <i class="ti ti-login me-1"></i>Prijava
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm">
+                            <i class="ti ti-user-plus me-1"></i>Registracija
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{-- ===== HERO ===== --}}
+    <div class="flex-fill">
+        <div class="bg-primary-lt py-5">
+            <div class="container py-4">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <span class="badge bg-primary text-white mb-3">
+                                Laravel 12 + PostgreSQL + Tabler 1.4
+                            </span>
+                        </div>
+                        <h1 class="display-5 fw-bold mb-3">
+                            Upravljajte svime<br>
+                            <span class="text-primary">na jednom mjestu</span>
+                        </h1>
+                        <p class="lead text-secondary mb-4">
+                            Profesionalno strukturiran admin sustav s ulogama korisnika,
+                            praćenjem aktivnosti i modernim sučeljem izgrađenim na Tabler UI frameworku.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="{{ route('register') }}" class="btn btn-primary btn-lg">
+                                <i class="ti ti-rocket me-2"></i>
+                                Započni besplatno
+                            </a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-lg">
+                                <i class="ti ti-login me-2"></i>
+                                Prijavi se
+                            </a>
                         </div>
                     </div>
-                    <div class="col-auto ms-auto d-print-none">
-                        <div class="btn-list">
-                            <x-ui.button variant="primary" icon="ti ti-plus">
-                                Novi zapis
-                            </x-ui.button>
+
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="card text-center p-3">
+                                    <div class="text-primary mb-2">
+                                        <i class="ti ti-users" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <div class="h2 mb-0">14</div>
+                                    <div class="text-secondary small">Korisnika</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card text-center p-3">
+                                    <div class="text-green mb-2">
+                                        <i class="ti ti-shield-check" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <div class="h2 mb-0">2</div>
+                                    <div class="text-secondary small">Uloge</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card text-center p-3">
+                                    <div class="text-orange mb-2">
+                                        <i class="ti ti-activity" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <div class="h2 mb-0">100%</div>
+                                    <div class="text-secondary small">Praćenje</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card text-center p-3">
+                                    <div class="text-purple mb-2">
+                                        <i class="ti ti-database" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <div class="h2 mb-0">PgSQL</div>
+                                    <div class="text-secondary small">Baza podataka</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Page body -->
-        <div class="page-body">
-            <div class="container-xl">
+        {{-- ===== FEATURE KARTICE ===== --}}
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Što sustav nudi?</h2>
+                <p class="text-secondary">Sve što trebaš za upravljanje korisnicima i sadržajem</p>
+            </div>
 
-                <!-- Alert Example -->
-                <x-ui.alert type="success" :dismissible="true" class="mb-3">
-                    <strong>Odlično!</strong> Uspješno ste postavili Tabler layout sistem.
-                </x-ui.alert>
-
-                <!-- Cards Row -->
-                    <!-- Cards Row -->
-                    <div class="row row-deck row-cards">
-                        <!-- App Info Card (prva u gridu) -->
-                        <div class="col-sm-6 col-lg-3">
-                            <x-ui.card class="card-sm">
-                                <div class="d-flex align-items-center">
-                                    <span class="bg-indigo text-white avatar">
-                                        <i class="ti ti-info-circle"></i>
-                                    </span>
-                                    <div class="ms-3">
-                                        <div class="text-secondary">App info</div>
-                                        <div class="small mb-1">PHP: <strong>8.5</strong></div>
-                                        <div class="small mb-1">Laravel: <strong>12.57.0</strong></div>
-                                        <div class="small mb-1">DB: <strong>pgsql</strong></div>
-                                    </div>
-                                </div>
-                            </x-ui.card>
+            <div class="row g-4">
+                <!-- RBAC -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <span class="avatar bg-red-lt text-red">
+                                    <i class="ti ti-shield-lock"></i>
+                                </span>
+                            </div>
+                            <h3 class="card-title">RBAC — Upravljanje ulogama</h3>
+                            <p class="text-secondary">
+                                Dvostupanjski sustav pristupa — <strong>Admin</strong> upravlja sustavom,
+                                <strong>Korisnik</strong> pristupa vlastitim podacima.
+                                Izgrađeno na Spatie Permission paketu.
+                            </p>
                         </div>
-                    <!-- Card 1 -->
-                    <div class="col-sm-6 col-lg-3">
-                        <x-ui.card class="card-sm">
-                            <div class="d-flex align-items-center">
-                                <span class="bg-primary text-white avatar">
-                                    <i class="ti ti-users"></i>
-                                </span>
-                                <div class="ms-3">
-                                    <div class="text-secondary">Korisnici</div>
-                                    <div class="h1 mb-0">132</div>
-                                </div>
-                            </div>
-                        </x-ui.card>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="col-sm-6 col-lg-3">
-                        <x-ui.card class="card-sm">
-                            <div class="d-flex align-items-center">
-                                <span class="bg-green text-white avatar">
-                                    <i class="ti ti-shopping-cart"></i>
-                                </span>
-                                <div class="ms-3">
-                                    <div class="text-secondary">Narudžbe</div>
-                                    <div class="h1 mb-0">78</div>
-                                </div>
-                            </div>
-                        </x-ui.card>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="col-sm-6 col-lg-3">
-                        <x-ui.card class="card-sm">
-                            <div class="d-flex align-items-center">
-                                <span class="bg-orange text-white avatar">
-                                    <i class="ti ti-chart-line"></i>
-                                </span>
-                                <div class="ms-3">
-                                    <div class="text-secondary">Prihod</div>
-                                    <div class="h1 mb-0">€8,450</div>
-                                </div>
-                            </div>
-                        </x-ui.card>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="col-sm-6 col-lg-3">
-                        <x-ui.card class="card-sm">
-                            <div class="d-flex align-items-center">
-                                <span class="bg-red text-white avatar">
-                                    <i class="ti ti-alert-triangle"></i>
-                                </span>
-                                <div class="ms-3">
-                                    <div class="text-secondary">Greške</div>
-                                    <div class="h1 mb-0">3</div>
-                                </div>
-                            </div>
-                        </x-ui.card>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <span class="badge bg-red-lt text-red me-1">admin</span>
+                            <span class="badge bg-blue-lt text-blue">user</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Installed Packages Section -->
-                <div class="row row-deck row-cards mt-3">
-                    <div class="col-12">
-                        <x-ui.card>
-                            <x-slot name="header">
-                                <h3 class="card-title">
-                                    <i class="ti ti-package me-2"></i>
-                                    Instalirani Paketi & Alati
-                                </h3>
-                            </x-slot>
-
-                            <div class="row g-3">
-                                <!-- Log Viewer -->
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="bg-blue-lt avatar me-3">
-                                            <i class="ti ti-file-text"></i>
-                                        </span>
-                                        <div>
-                                            <h4 class="mb-1">Log Viewer</h4>
-                                            <p class="text-secondary mb-2">Pregled Laravel log fileova</p>
-                                            <a href="/log-viewer" target="_blank" class="btn btn-sm btn-primary">
-                                                Otvori Log Viewer
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Backup -->
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="bg-green-lt avatar me-3">
-                                            <i class="ti ti-database-export"></i>
-                                        </span>
-                                        <div>
-                                            <h4 class="mb-1">Spatie Backup</h4>
-                                            <p class="text-secondary mb-2">Backupi aplikacije i baze</p>
-                                            <code class="text-muted small">php artisan backup:run</code>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Media Library -->
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="bg-purple-lt avatar me-3">
-                                            <i class="ti ti-photo"></i>
-                                        </span>
-                                        <div>
-                                            <h4 class="mb-1">Media Library</h4>
-                                            <p class="text-secondary mb-2">Upravljanje medijama</p>
-                                            <span class="badge bg-purple">Instaliran</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Activity Log -->
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="bg-orange-lt avatar me-3">
-                                            <i class="ti ti-activity"></i>
-                                        </span>
-                                        <div>
-                                            <h4 class="mb-1">Activity Log</h4>
-                                            <p class="text-secondary mb-2">Praćenje aktivnosti korisnika</p>
-                                            <span class="badge bg-orange">Instaliran</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Permissions -->
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="bg-red-lt avatar me-3">
-                                            <i class="ti ti-shield-lock"></i>
-                                        </span>
-                                        <div>
-                                            <h4 class="mb-1">Permissions</h4>
-                                            <p class="text-secondary mb-2">Upravljanje rolama i dozvolama</p>
-                                            <span class="badge bg-red">Instaliran</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Debugbar (Dev) -->
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="bg-cyan-lt avatar me-3">
-                                            <i class="ti ti-bug"></i>
-                                        </span>
-                                        <div>
-                                            <h4 class="mb-1">Debugbar</h4>
-                                            <p class="text-secondary mb-2">Debug toolbar (samo dev)</p>
-                                            <span class="badge bg-cyan">Dev Only</span>
-                                        </div>
-                                    </div>
-                                </div>
+                <!-- Activity Log -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <span class="avatar bg-orange-lt text-orange">
+                                    <i class="ti ti-activity"></i>
+                                </span>
                             </div>
-                        </x-ui.card>
+                            <h3 class="card-title">Praćenje aktivnosti</h3>
+                            <p class="text-secondary">
+                                Svaka akcija u sustavu se bilježi — tko je što napravio i kada.
+                                Admin pregledava sve aktivnosti, korisnici samo svoje.
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <span class="badge bg-orange-lt text-orange">Spatie ActivityLog</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Main Content Area -->
-                <div class="row row-deck row-cards mt-3">
-                    <!-- Table Example -->
-                    <div class="col-lg-8">
-                        <x-ui.card>
-                            <x-slot name="header">
-                                <h3 class="card-title">Nedavne aktivnosti</h3>
-                            </x-slot>
-
-                            <x-ui.table :headers="['Korisnik', 'Aktivnost', 'Datum', 'Status']">
-                                <tr>
-                                    <td>Ivan Horvat</td>
-                                    <td>Kreirao novu narudžbu</td>
-                                    <td>2 sata</td>
-                                    <td><span class="badge bg-success">Uspjeh</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Ana Kovač</td>
-                                    <td>Ažurirala profil</td>
-                                    <td>4 sata</td>
-                                    <td><span class="badge bg-info">Info</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Marko Marić</td>
-                                    <td>Prijava u sistem</td>
-                                    <td>6 sati</td>
-                                    <td><span class="badge bg-success">Uspjeh</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Petra Novak</td>
-                                    <td>Pokušaj prijave</td>
-                                    <td>8 sati</td>
-                                    <td><span class="badge bg-warning">Upozorenje</span></td>
-                                </tr>
-                            </x-ui.table>
-                        </x-ui.card>
-                    </div>
-
-                    <!-- Form Example -->
-                    <div class="col-lg-4">
-                        <x-ui.card>
-                            <x-slot name="header">
-                                <h3 class="card-title">Brzi unos</h3>
-                            </x-slot>
-
-                            <form>
-                                <x-ui.form-input
-                                    name="name"
-                                    label="Ime"
-                                    placeholder="Unesite ime"
-                                    icon="ti ti-user"
-                                    :required="true"
-                                />
-
-                                <x-ui.form-input
-                                    name="email"
-                                    type="email"
-                                    label="Email"
-                                    placeholder="email@primjer.com"
-                                    icon="ti ti-mail"
-                                    :required="true"
-                                />
-
-                                <x-ui.form-input
-                                    name="phone"
-                                    type="tel"
-                                    label="Telefon"
-                                    placeholder="+385 99 123 4567"
-                                    icon="ti ti-phone"
-                                    hint="Format: +385 99 123 4567"
-                                />
-
-                                <div class="d-flex gap-2">
-                                    <x-ui.button variant="primary" type="submit" class="w-100">
-                                        Spremi
-                                    </x-ui.button>
-                                    <x-ui.button variant="secondary" :outline="true" type="button" class="w-100">
-                                        Odustani
-                                    </x-ui.button>
-                                </div>
-                            </form>
-                        </x-ui.card>
-                    </div>
-                </div>
-    <!-- Trigger za modal -->
-    <div class="mt-4">
-        <x-ui.button variant="primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Otvori Modal
-        </x-ui.button>
-    </div>
-                <!-- Additional Alerts -->
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <x-ui.alert type="info" class="mb-3">
-                            <strong>Info:</strong> Sve komponente su dostupne u <code>resources/views/components/ui/</code> folderu.
-                        </x-ui.alert>
-
-                        <x-ui.alert type="warning">
-                            <strong>Napomena:</strong> Ovo je demo stranica. Prilagodite je prema svojim potrebama.
-                        </x-ui.alert>
+                <!-- Profil -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <span class="avatar bg-blue-lt text-blue">
+                                    <i class="ti ti-user-edit"></i>
+                                </span>
+                            </div>
+                            <h3 class="card-title">Upravljanje profilom</h3>
+                            <p class="text-secondary">
+                                Svaki korisnik može uređivati vlastite podatke — ime, email i lozinku
+                                — direktno iz svog dashboarda.
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <span class="badge bg-blue-lt text-blue">Self-service profil</span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Admin panel -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <span class="avatar bg-purple-lt text-purple">
+                                    <i class="ti ti-settings"></i>
+                                </span>
+                            </div>
+                            <h3 class="card-title">Admin panel</h3>
+                            <p class="text-secondary">
+                                Administrator pregledava statistike, upravlja korisnicima i
+                                dodjeljuje uloge iz preglednog Tabler sučelja.
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <span class="badge bg-purple-lt text-purple">Samo za admina</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log Viewer -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <span class="avatar bg-cyan-lt text-cyan">
+                                    <i class="ti ti-file-text"></i>
+                                </span>
+                            </div>
+                            <h3 class="card-title">Log Viewer</h3>
+                            <p class="text-secondary">
+                                Pregled Laravel log datoteka direktno iz preglednika.
+                                Dostupan isključivo administratorima sustava.
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <span class="badge bg-cyan-lt text-cyan">Opcodes Log Viewer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stack -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <span class="avatar bg-green-lt text-green">
+                                    <i class="ti ti-stack-2"></i>
+                                </span>
+                            </div>
+                            <h3 class="card-title">Moderan tech stack</h3>
+                            <p class="text-secondary">
+                                Laravel 12, PostgreSQL, Tabler 1.4, Vite — sve najnovije verzije
+                                s punom podrškom za daljnji razvoj.
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <span class="badge bg-green-lt text-green me-1">Laravel 12</span>
+                            <span class="badge bg-green-lt text-green">PHP 8.2+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ===== CTA BANNER ===== --}}
+        <div class="bg-primary py-5">
+            <div class="container text-center text-white">
+                <h2 class="fw-bold mb-3">Spreman/a za početak?</h2>
+                <p class="mb-4 opacity-75">
+                    Registriraj se i odmah pristupi svom dashboardu.
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ route('register') }}" class="btn btn-white btn-lg">
+                        <i class="ti ti-user-plus me-2"></i>
+                        Kreiraj račun
+                    </a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-white btn-lg">
+                        <i class="ti ti-login me-2"></i>
+                        Prijavi se
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
+    {{-- ===== STICKY FOOTER ===== --}}
+    <footer class="footer footer-transparent d-print-none border-top">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col">
+                    <p class="mb-0 text-secondary">
+                        &copy; {{ date('Y') }}
+                        <a href="{{ url('/') }}" class="link-secondary">{{ config('app.name') }}</a>
+                        — Izgrađeno s
+                        <a href="https://laravel.com" target="_blank" class="link-secondary">Laravel 12</a>
+                        &amp;
+                        <a href="https://tabler.io" target="_blank" class="link-secondary">Tabler</a>
+                    </p>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex gap-3">
+                        <span class="badge bg-secondary-lt">
+                            <i class="ti ti-brand-laravel me-1"></i>Laravel 12
+                        </span>
+                        <span class="badge bg-blue-lt text-blue">
+                            <i class="ti ti-database me-1"></i>PostgreSQL
+                        </span>
+                        <span class="badge bg-green-lt text-green">
+                            <i class="ti ti-layout me-1"></i>Tabler 1.4
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-
-    <x-slot name="scripts">
-        <!-- Modal Example (if needed) -->
-        <x-ui.modal id="exampleModal" title="Primjer modala" size="lg">
-            <p>Ovo je primjer modal dialoga.</p>
-            <x-slot name="footer">
-                <x-ui.button variant="secondary" data-bs-dismiss="modal">
-                    Zatvori
-                </x-ui.button>
-                <x-ui.button variant="primary">
-                    Spremi promjene
-                </x-ui.button>
-            </x-slot>
-        </x-ui.modal>
-
-        <!-- Custom scripts if needed -->
-    </x-slot>
-</x-layouts.app>
+</x-layouts.landing>
