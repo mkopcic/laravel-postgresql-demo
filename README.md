@@ -7,6 +7,8 @@ Profesionalno strukturiran Laravel 12 projekt s PostgreSQL bazom podataka i Tabl
 - [O projektu](#o-projektu)
 - [Tehnologije](#tehnologije)
 - [Instalirani Paketi](#instalirani-paketi)
+- [RBAC — Autentikacija i autorizacija](#rbac--autentikacija-i-autorizacija)
+- [MCP Serveri](#mcp-serveri)
 - [Struktura projekta](#struktura-projekta)
 - [Instalacija](#instalacija)
 - [Tabler Layout Sistem](#tabler-layout-sistem)
@@ -55,7 +57,113 @@ Profesionalno strukturiran Laravel 12 projekt s PostgreSQL bazom podataka i Tabl
     - Konfig: `config/permission.php`
     - Migracija: `create_permission_tables`
 
-## �📁 Struktura projekta
+## 🔐 RBAC — Autentikacija i autorizacija
+
+Implementirano s **spatie/laravel-permission**. Detaljna dokumentacija u [`RBAC.md`](RBAC.md).
+
+### Uloge i test korisnici
+
+| Email | Lozinka | Uloga |
+|-------|---------|-------|
+| `admin@example.com` | `password` | admin |
+| `user@example.com` | `password` | user |
+
+### Brzi pregled ruta
+
+| URL | Middleware | Opis |
+|-----|-----------|------|
+| `/` | — | Landing page (gosti) / redirect (prijavljeni) |
+| `/login`, `/register` | `guest` | Autentikacija |
+| `/dashboard` | `auth, role:user\|admin` | Korisnički dashboard |
+| `/admin/dashboard` | `auth, role:admin` | Admin panel |
+| `/admin/users` | `auth, role:admin` | Upravljanje korisnicima |
+| `/log-viewer` | `auth, role:admin` | Laravel Log Viewer |
+| `/showcase` | — | UI komponente showcase |
+
+```bash
+# Pokreni migracije i seedere (kreira test korisnike i uloge)
+php artisan migrate:fresh --seed
+```
+
+---
+
+## 🤖 MCP Serveri
+
+Projekt koristi dva MCP servera za Claude Code integraciju.
+
+### 1. laravel-demo-boost (Laravel Boost)
+
+Razvojni alati ugrađeni u Laravel projekt.
+
+| Alat | Opis |
+|------|------|
+| `database-query` | Read-only SQL upiti |
+| `database-schema` | Pregled sheme baze |
+| `tinker` | PHP snippeti u runtime-u |
+| `list-routes` | Sve registrirane rute |
+| `read-log-entries` | Čitanje log datoteka |
+| `browser-logs` | Frontend greške |
+| `application-info` | Informacije o aplikaciji |
+
+### 2. laravel-demo-mcp (Standalone)
+
+Poslovna logika — CRUD korisnici, uloge, aktivnosti.
+Projekt se nalazi u `C:\laragon\www\laravel-demo-mcp\`.
+
+| Alat | Opis |
+|------|------|
+| `get_users` / `get_user` | Lista i detalji korisnika |
+| `create_user` | Kreiranje korisnika |
+| `update_user` | Ažuriranje korisnika |
+| `assign_role` | Dodjela uloge |
+| `delete_user` | Brisanje korisnika |
+| `get_activities` | Activity log |
+| `get_stats` | Statistike aplikacije |
+
+**Resources:** `users://list`, `users://{id}`, `roles://list`, `activity://recent`, `config://app`
+**Prompts:** `user_report`, `audit_log`
+
+### Konfiguracija (jednom po stroju)
+
+```bash
+# Dodaj oba MCP servera u Claude Code (user razina — vrijedi za sve projekte)
+claude mcp add --scope user laravel-demo-boost -- \
+  "C:\laragon\bin\php\php-8.3.30-Win32-vs16-x64\php.exe" \
+  "C:\laragon\www\laravel-postgresql-demo\artisan" boost:mcp
+
+claude mcp add --scope user laravel-demo-mcp -- \
+  "C:\laragon\bin\php\php-8.5.6-nts-Win32-vs17-x64\php.exe" \
+  "C:\laragon\www\laravel-demo-mcp\server.php"
+
+# Provjera statusa
+claude mcp list
+```
+
+### Claude Desktop (standalone chat)
+
+Dodaj u `%APPDATA%\Claude\claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "laravel-demo-boost": {
+      "command": "C:\\laragon\\bin\\php\\php-8.3.30-Win32-vs16-x64\\php.exe",
+      "args": ["C:\\laragon\\www\\laravel-postgresql-demo\\artisan", "boost:mcp"]
+    },
+    "laravel-demo-mcp": {
+      "command": "C:\\laragon\\bin\\php\\php-8.5.6-nts-Win32-vs17-x64\\php.exe",
+      "args": ["C:\\laragon\\www\\laravel-demo-mcp\\server.php"]
+    }
+  }
+}
+```
+
+> **Napomena:** `claude_desktop_config.json` vrijedi za standalone Claude Desktop chat.
+> Za Claude Code (VS Code / CLI) koristi `claude mcp add` naredbe gore.
+
+---
+
+## 📁 Struktura projekta
 
 ### Blade Komponente
 
