@@ -71,12 +71,12 @@
                                         <td class="text-secondary">{{ $user->email }}</td>
                                         <td>
                                             @foreach ($user->roles as $role)
-                                                <span class="badge {{ $role->name === 'admin' ? 'bg-red' : 'bg-blue' }}">
+                                                <span class="badge {{ $role->name === 'admin' ? 'text-bg-danger' : 'text-bg-primary' }}">
                                                     {{ ucfirst($role->name) }}
                                                 </span>
                                             @endforeach
                                             @if ($user->roles->isEmpty())
-                                                <span class="badge bg-secondary">Bez uloge</span>
+                                                <span class="badge text-bg-warning">Bez uloge</span>
                                             @endif
                                         </td>
                                         <td class="text-secondary">

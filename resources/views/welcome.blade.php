@@ -49,7 +49,7 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <span class="badge bg-primary text-white mb-3">
-                                Laravel 12 + PostgreSQL + Tabler 1.4
+                                Laravel 13 + PostgreSQL + Tabler 1.4
                             </span>
                         </div>
                         <h1 class="display-5 fw-bold mb-3">
@@ -242,12 +242,12 @@
                             </div>
                             <h3 class="card-title">Moderan tech stack</h3>
                             <p class="text-secondary">
-                                Laravel 12, PostgreSQL, Tabler 1.4, Vite — sve najnovije verzije
+                                Laravel 13, PostgreSQL, Tabler 1.4, Vite — sve najnovije verzije
                                 s punom podrškom za daljnji razvoj.
                             </p>
                         </div>
                         <div class="card-footer bg-transparent border-0 pt-0">
-                            <span class="badge bg-green-lt text-green me-1">Laravel 12</span>
+                            <span class="badge bg-green-lt text-green me-1">Laravel 13</span>
                             <span class="badge bg-green-lt text-green">PHP 8.2+</span>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                         &copy; {{ date('Y') }}
                         <a href="{{ url('/') }}" class="link-secondary">{{ config('app.name') }}</a>
                         — Izgrađeno s
-                        <a href="https://laravel.com" target="_blank" class="link-secondary">Laravel 12</a>
+                        <a href="https://laravel.com" target="_blank" class="link-secondary">Laravel 13</a>
                         &amp;
                         <a href="https://tabler.io" target="_blank" class="link-secondary">Tabler</a>
                     </p>
@@ -293,7 +293,7 @@
                 <div class="col-auto">
                     <div class="d-flex gap-3">
                         <span class="badge bg-secondary-lt">
-                            <i class="ti ti-brand-laravel me-1"></i>Laravel 12
+                            <i class="ti ti-brand-laravel me-1"></i>Laravel 13
                         </span>
                         <span class="badge bg-blue-lt text-blue">
                             <i class="ti ti-database me-1"></i>PostgreSQL
